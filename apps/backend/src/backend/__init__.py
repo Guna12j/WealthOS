@@ -1,6 +1,7 @@
 from fastapi import Depends, FastAPI
 from sqlalchemy import text
 from sqlalchemy.orm import Session
+from backend.api.router import router
 
 from backend.database.dependencies import get_db
 
@@ -10,6 +11,7 @@ app = FastAPI(
     version="0.1.0",
 )
 
+app.include_router(router, prefix="/api")
 
 @app.get("/health")
 def health_check() -> dict[str, str]:
